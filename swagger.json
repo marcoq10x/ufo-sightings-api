@@ -1,0 +1,102 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "UFO Sightings Tracker API",
+    "description": "Mulder and Scully's personal database for tracking unidentified aerial phenomena."
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": ["http", "https"],
+  "paths": {
+    "/sightings": {
+      "get": {
+        "tags": ["Sightings"],
+        "summary": "Get all UFO sightings",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Sightings"],
+        "summary": "Report a new UFO sighting",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Sighting data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "location": { "type": "string", "example": "Roswell, NM" },
+                "shape": { "type": "string", "example": "Saucer" },
+                "durationMinutes": { "type": "number", "example": 45 },
+                "description": { "type": "string", "example": "Hovered silently over the desert." },
+                "isDebunked": { "type": "boolean", "example": false }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/sightings/{id}": {
+      "put": {
+        "tags": ["Sightings"],
+        "summary": "Update a sighting",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "location": { "type": "string", "example": "Roswell, NM" },
+                "shape": { "type": "string", "example": "Weather Balloon" },
+                "durationMinutes": { "type": "number", "example": 45 },
+                "description": { "type": "string", "example": "Hovered silently over the desert." },
+                "isDebunked": { "type": "boolean", "example": true }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Sightings"],
+        "summary": "Erase a sighting record",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
