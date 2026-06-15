@@ -1,41 +1,62 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
     "title": "UFO Sightings Tracker API",
-    "description": "Mulder and Scully's personal database for tracking unidentified aerial phenomena."
+    "description": "Mulder and Scully's personal database for tracking unidentified aerial phenomena.",
+    "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "ufo-sightings-api.onrender.com",
   "basePath": "/",
-  "schemes": ["http", "https"],
+  "schemes": [
+    "https"
+  ],
   "paths": {
-    "/sightings": {
+    "/api-docs": {
       "get": {
-        "tags": ["Sightings"],
-        "summary": "Get all UFO sightings",
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/sightings/": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "post": {
-        "tags": ["Sightings"],
-        "summary": "Report a new UFO sighting",
+        "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
-            "description": "Sighting data",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "location": { "type": "string", "example": "Roswell, NM" },
-                "shape": { "type": "string", "example": "Saucer" },
-                "durationMinutes": { "type": "number", "example": 45 },
-                "description": { "type": "string", "example": "Hovered silently over the desert." },
-                "isDebunked": { "type": "boolean", "example": false }
+                "location": {
+                  "example": "any"
+                },
+                "date": {
+                  "example": "any"
+                },
+                "shape": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                }
               }
             }
           }
@@ -43,14 +64,47 @@
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/sightings/{id}": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "put": {
-        "tags": ["Sightings"],
-        "summary": "Update a sighting",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -61,15 +115,21 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "location": { "type": "string", "example": "Roswell, NM" },
-                "shape": { "type": "string", "example": "Weather Balloon" },
-                "durationMinutes": { "type": "number", "example": 45 },
-                "description": { "type": "string", "example": "Hovered silently over the desert." },
-                "isDebunked": { "type": "boolean", "example": true }
+                "location": {
+                  "example": "any"
+                },
+                "date": {
+                  "example": "any"
+                },
+                "shape": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                }
               }
             }
           }
@@ -77,12 +137,20 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "tags": ["Sightings"],
-        "summary": "Erase a sighting record",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -92,8 +160,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
