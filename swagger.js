@@ -5,8 +5,9 @@ const doc = {
     title: 'UFO Sightings Tracker API',
     description: "Mulder and Scully's personal database for tracking unidentified aerial phenomena."
   },
-  host: 'ufo-sightings-api.onrender.com',
-  schemes: ['https']
+  // We are aiming back at the live cloud engine
+host: 'ufo-sightings-api.onrender.com',
+schemes: ['https']
 };
 
 const outputFile = './swagger.json';
