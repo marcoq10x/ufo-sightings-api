@@ -1,217 +1,170 @@
 {
   "swagger": "2.0",
   "info": {
+    "version": "1.0.0",
     "title": "UFO Sightings Tracker API",
-    "description": "Mulder and Scully's personal database for tracking unidentified aerial phenomena.",
-    "version": "1.0.0"
+    "description": "Mulder and Scully's personal database for tracking unidentified aerial phenomena."
   },
   "host": "ufo-sightings-api.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https", "http"],
   "paths": {
-    "/login": {
+    "/sightings": {
       "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/github/callback": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/logout": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/api-docs": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/sightings/": {
-      "get": {
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        "tags": ["Sightings"],
+        "summary": "Get all UFO sightings",
+        "responses": { "200": { "description": "OK" } }
       },
       "post": {
-        "description": "",
+        "tags": ["Sightings"],
+        "summary": "Report a new UFO sighting",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "description": "Sighting data",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "location": {
-                  "example": "any"
-                },
-                "date": {
-                  "example": "any"
-                },
-                "shape": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                }
+                "location": { "type": "string", "example": "Roswell, NM" },
+                "date": { "type": "string", "example": "1947-07-04" },
+                "shape": { "type": "string", "example": "Saucer" },
+                "description": { "type": "string", "example": "Hovered silently." },
+                "durationMinutes": { "type": "number", "example": 45 },
+                "witnessCount": { "type": "number", "example": 3 },
+                "isDebunked": { "type": "boolean", "example": false }
               }
             }
           }
         ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        "responses": { "201": { "description": "Created" } }
       }
     },
     "/sightings/{id}": {
       "get": {
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["Sightings"],
+        "summary": "Get a sighting by ID",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        "responses": { "200": { "description": "OK" } }
       },
       "put": {
-        "description": "",
+        "tags": ["Sightings"],
+        "summary": "Update a sighting",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
+          { "name": "id", "in": "path", "required": true, "type": "string" },
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "location": {
-                  "example": "any"
-                },
-                "date": {
-                  "example": "any"
-                },
-                "shape": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                }
+                "location": { "type": "string", "example": "Roswell, NM" },
+                "date": { "type": "string", "example": "1947-07-04" },
+                "shape": { "type": "string", "example": "Weather Balloon" },
+                "description": { "type": "string", "example": "Hovered silently." },
+                "durationMinutes": { "type": "number", "example": 45 },
+                "witnessCount": { "type": "number", "example": 3 },
+                "isDebunked": { "type": "boolean", "example": true }
               }
             }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        "responses": { "204": { "description": "No Content" } }
       },
       "delete": {
-        "description": "",
+        "tags": ["Sightings"],
+        "summary": "Erase a sighting record",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get all users",
+        "responses": { "200": { "description": "OK" } }
+      },
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create a new user manually",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
+            "name": "body",
+            "in": "body",
+            "description": "User data",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": { "type": "string", "example": "FoxMulder" },
+                "githubId": { "type": "string", "example": "12345678" },
+                "displayName": { "type": "string", "example": "Fox Mulder" },
+                "profileUrl": { "type": "string", "example": "https://github.com/foxmulder" }
+              }
+            }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get a user by ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update a user",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": { "type": "string", "example": "FoxMulder" },
+                "githubId": { "type": "string", "example": "12345678" },
+                "displayName": { "type": "string", "example": "Fox Mulder" },
+                "profileUrl": { "type": "string", "example": "https://github.com/foxmulder" }
+              }
+            }
           }
-        }
+        ],
+        "responses": { "204": { "description": "No Content" } }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Erase a user record",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/login": {
+      "get": {
+        "tags": ["Authentication"],
+        "summary": "Login with GitHub",
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/logout": {
+      "get": {
+        "tags": ["Authentication"],
+        "summary": "Logout",
+        "responses": { "200": { "description": "OK" } }
       }
     }
   }

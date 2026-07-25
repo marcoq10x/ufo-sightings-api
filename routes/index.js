@@ -4,6 +4,8 @@ const passport = require('passport');
 
 router.use('/', require('./swagger'));
 router.use('/sightings', require('./sightings'));
+// Connecting the new users routes
+router.use('/users', require('./users')); 
 
 // Send the user to GitHub to log in
 router.get('/login', passport.authenticate('github'), (req, res) => {});
